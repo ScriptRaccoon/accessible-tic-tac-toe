@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- issue 1: missing html language -->
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<!-- issue 2: missing title -->
+		<link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+		<!-- issue 3: missing "header" landmark -->
+		<h1>Tic Tac Toe (Inaccessible)</h1>
+		<!-- issue 4: missing "main" landmark -->
+		<div class="game">
+			<div class="board"></div>
+			<!-- issue 5: changes to 'outcome' are not read by assistive tech -->
+			<div class="outcome"></div>
+			<button class="btn restart">Restart</button>
+		</div>
+		<script src="main.js"></script>
+	</body>
+</html>

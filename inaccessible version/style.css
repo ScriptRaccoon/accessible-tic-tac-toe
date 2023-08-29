@@ -1,0 +1,81 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background-color: #111;
+	color: white;
+}
+
+.game {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+h1 {
+	font-weight: 400;
+	font-size: 2.5rem;
+}
+
+button {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: none;
+	border: none;
+	transition: all 100ms;
+	cursor: pointer;
+	outline: none;
+}
+
+/* issue 1: missing focus and hover styles for button */
+
+.board {
+	--size: 3;
+	margin-block: 2rem;
+	display: grid;
+	grid-template: repeat(var(--size), 1fr) / repeat(var(--size), 1fr);
+	gap: 0.5rem;
+	transition: scale 100ms;
+}
+
+.outcome {
+	margin-bottom: 2rem;
+	/* issue 2: insufficient color contrast */
+	color: #444;
+}
+
+.cell {
+	width: 4rem;
+	aspect-ratio: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2.5rem;
+	background-color: #222;
+	border: 0.1rem solid #aaa;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	/* issue 3: cursor pointer is irritating when cell is filled */
+}
+
+.cell.highlight {
+	box-shadow: 0 0 1rem #fff4;
+	background-color: #0f05;
+}
+
+.btn {
+	background-color: #222;
+	padding: 0.5rem 1rem;
+	border-radius: 0.25rem;
+}

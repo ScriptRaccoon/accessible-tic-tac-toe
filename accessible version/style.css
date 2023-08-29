@@ -1,0 +1,95 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background-color: #111;
+	color: white;
+}
+
+main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+h1 {
+	font-weight: 400;
+	font-size: 2.5rem;
+}
+
+button {
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	background: none;
+	border: none;
+	transition: all 100ms;
+	cursor: pointer;
+}
+
+button:focus-visible {
+	outline: 0.1rem solid white;
+	outline-offset: 0.1rem;
+}
+
+button:hover {
+	filter: brightness(1.4);
+}
+
+.board {
+	--size: 3;
+	margin-block: 2rem;
+	display: grid;
+	grid-template: repeat(var(--size), 1fr) / repeat(var(--size), 1fr);
+	gap: 0.5rem;
+	transition: scale 100ms;
+}
+
+.outcome {
+	margin-bottom: 2rem;
+}
+
+.cell {
+	width: 4rem;
+	aspect-ratio: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2.5rem;
+	background-color: #222;
+	border: 0.1rem solid #aaa;
+	border-radius: 0.5rem;
+}
+
+.cell:not(:empty) {
+	cursor: not-allowed;
+}
+
+.cell.highlight {
+	box-shadow: 0 0 1rem #fff4;
+	background-color: #0f05;
+}
+
+.btn {
+	background-color: #222;
+	padding: 0.5rem 1rem;
+	border-radius: 0.25rem;
+}
+
+.visually-hidden {
+	position: absolute;
+	left: -100vw;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
