@@ -15,6 +15,11 @@ body {
 	color: white;
 }
 
+img {
+	display: block;
+	max-width: 100%;
+}
+
 .game {
 	display: flex;
 	align-items: center;
@@ -25,20 +30,30 @@ body {
 h1 {
 	font-weight: 400;
 	font-size: 2.5rem;
+	text-align: center;
 }
 
 button {
 	font-family: inherit;
 	font-size: inherit;
-	color: inherit;
 	background: none;
 	border: none;
 	transition: all 100ms;
 	cursor: pointer;
-	outline: none;
+	background-color: #222;
+	color: white;
+	padding: 0.4rem;
+	border-radius: 0.25rem;
 }
 
-/* issue 1: missing focus and hover styles for button */
+button:focus-visible {
+	outline: 0.1rem solid white;
+	outline-offset: 0.1rem;
+}
+
+button:hover {
+	filter: brightness(1.4);
+}
 
 .board {
 	--size: 3;
@@ -50,9 +65,7 @@ button {
 }
 
 .outcome {
-	margin-bottom: 2rem;
-	/* issue 2: insufficient color contrast */
-	color: #444;
+	margin-bottom: 1.5rem;
 }
 
 .cell {
@@ -62,11 +75,14 @@ button {
 	align-items: center;
 	justify-content: center;
 	font-size: 2.5rem;
-	background-color: #222;
 	border: 0.1rem solid #aaa;
 	border-radius: 0.5rem;
-	cursor: pointer;
-	/* issue 3: cursor pointer is irritating when cell is filled */
+	padding: 0;
+}
+
+.cell:not(:empty),
+.board.ended .cell {
+	cursor: not-allowed;
 }
 
 .cell.highlight {
@@ -74,8 +90,38 @@ button {
 	background-color: #0f05;
 }
 
-.btn {
-	background-color: #222;
-	padding: 0.5rem 1rem;
-	border-radius: 0.25rem;
+.restart {
+	width: 2rem;
+	padding: 0.4rem;
+}
+
+.visually-hidden {
+	position: absolute;
+	left: -100vw;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.dialog {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	border: none;
+	border-radius: 0.5rem;
+	padding: 1.5rem;
+	background-color: white;
+	color: #111;
+	text-align: center;
+	font-size: 1.25rem;
+	box-shadow: 0rem 0rem 1rem #0007;
+}
+
+.dialog_text {
+	margin-bottom: 1rem;
+}
+
+.dialog button {
+	outline-color: #222;
 }

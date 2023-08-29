@@ -46,7 +46,6 @@ function create_cell(i, j) {
 	CELLS.push(cell);
 	cell.addEventListener("click", () => handle_click(cell, i, j));
 	// issue 2: missing feedback about row and column on focus
-	// ---> "add_label" function
 }
 
 function write(text, duration) {
@@ -86,6 +85,7 @@ function check_ending() {
 	const winning_pattern = PATTERNS.find(is_winning);
 	if (winning_pattern) {
 		highlight_pattern(winning_pattern);
+		// issue 5: information about game win only visible for a short amount of time
 		write(`${get_player_symbol()} has won!`, 2000);
 		return true;
 	}
@@ -154,6 +154,5 @@ function restart_game() {
 	player_index = 0;
 	ended = false;
 	initialize_board();
-	// issue 6: missing feedback about game restart
 	write_player();
 }

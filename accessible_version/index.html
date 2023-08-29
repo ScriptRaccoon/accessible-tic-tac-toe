@@ -14,10 +14,18 @@
 		<header>
 			<h1>Tic Tac Toe</h1>
 		</header>
-		<main>
+		<main class="game">
 			<div class="board"></div>
 			<div class="outcome" aria-live="polite"></div>
-			<button class="btn restart">Restart</button>
+			<button class="restart" aria-label="restart">
+				<img src="restart-icon.png" alt="" />
+			</button>
+			<dialog class="dialog filled">
+				<p class="dialog_text"></p>
+				<form method="dialog">
+					<button class="inverted">Ok</button>
+				</form>
+			</dialog>
 		</main>
 		<script src="main.js"></script>
 	</body>

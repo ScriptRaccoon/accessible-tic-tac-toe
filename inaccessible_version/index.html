@@ -19,7 +19,11 @@
 			<div class="board"></div>
 			<!-- issue 5: changes to 'outcome' are not read by assistive tech -->
 			<div class="outcome"></div>
-			<button class="btn restart">Restart</button>
+			<!-- issue 6: no aria-label -->
+			<button class="restart">
+				<!-- issue 7: no alt text -->
+				<img src="restart-icon.png" />
+			</button>
 		</div>
 		<script src="main.js"></script>
 	</body>

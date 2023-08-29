@@ -1,6 +1,8 @@
 const outcome_element = document.querySelector(".outcome");
 const restart_button = document.querySelector(".restart");
 const board_element = document.querySelector(".board");
+const dialog = document.querySelector(".dialog");
+const dialog_text = document.querySelector(".dialog_text");
 
 const PLAYER_SYMBOLS = ["X", "O"];
 const SIZE = 3;
@@ -41,23 +43,24 @@ function create_cells() {
 function create_cell(i, j) {
 	const cell = document.createElement("button");
 	cell.classList.add("cell");
+	cell.setAttribute("aria-label", "Empty");
 	board_element.appendChild(cell);
 	CELLS.push(cell);
 	cell.addEventListener("click", () => handle_click(cell, i, j));
-	add_label(cell, i, j);
+	add_description(cell, i, j);
 }
 
-function add_label(cell, i, j) {
-	const label = document.createElement("div");
-	label.innerText = `Row ${i + 1}, Column ${j + 1}`;
-	label.id = `d${i},${j}`;
-	cell.setAttribute("aria-labelledby", label.id);
-	label.classList.add("visually-hidden");
-	board_element.appendChild(label);
+function add_description(cell, i, j) {
+	const description = document.createElement("div");
+	description.innerText = `Row ${i + 1}, Column ${j + 1}`;
+	description.id = `d${i},${j}`;
+	cell.setAttribute("aria-describedby", description.id);
+	description.classList.add("visually-hidden");
+	board_element.appendChild(description);
 }
 
 function write(text) {
-	outcome_element.innerText = text;
+	outcome_element.innerHTML = text;
 }
 
 function write_player() {
@@ -74,18 +77,23 @@ function switch_player() {
 
 function handle_click(cell, i, j) {
 	if (ended) {
-		write("The game has ended");
+		dialog_text.innerText = "The game has already ended";
+		dialog.showModal();
 		return;
 	}
 	if (board[i][j] != null) {
-		write("The cell is already filled");
-		setTimeout(write_player, 2000);
+		dialog_text.innerText = "The cell is already filled";
+		dialog.showModal();
 		return;
 	}
 	cell.innerText = get_player_symbol();
+	cell.removeAttribute("aria-label");
 	board[i][j] = player_index;
 	ended = check_ending();
-	if (ended) return;
+	if (ended) {
+		board_element.classList.add("ended");
+		return;
+	}
 	switch_player();
 	write_player();
 }
@@ -94,13 +102,17 @@ function check_ending() {
 	const winning_pattern = PATTERNS.find(is_winning);
 	if (winning_pattern) {
 		highlight_pattern(winning_pattern);
-		write(`${get_player_symbol()} has won!`);
+		dialog_text.innerText = `${get_player_symbol()} has won!`;
+		dialog.showModal();
+		write("&nbsp;");
 		return true;
 	}
 
 	const filled = board.flat().every((entry) => entry !== null);
 	if (filled) {
-		write("The game is drawn!");
+		dialog_text.innerText = "The game is drawn!";
+		dialog.showModal();
+		write("&nbsp;");
 		return true;
 	}
 
@@ -155,12 +167,13 @@ restart_button.addEventListener("click", () => restart_game());
 function restart_game() {
 	CELLS.forEach((cell) => {
 		cell.innerText = "";
+		cell.setAttribute("aria-label", "Empty");
 		cell.classList.remove("highlight");
 	});
 
 	player_index = 0;
 	ended = false;
+	board_element.classList.remove("ended");
 	initialize_board();
-	write("Game has restarted");
-	setTimeout(write_player, 2000);
+	write_player();
 }
